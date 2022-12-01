@@ -1,2 +1,2 @@
-Set the temporal server first:
-https://learn.temporal.io/getting_started/java/dev_environment/
+Temporal provide a docker image for server:
+https://github.com/temporalio/docker-compose.git
