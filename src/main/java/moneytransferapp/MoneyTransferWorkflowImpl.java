@@ -36,11 +36,11 @@ public class MoneyTransferWorkflowImpl implements MoneyTransferWorkflow {
     @Override
     public void transfer(String fromAccountId, String toAccountId, String referenceId, double amount) {
 
-        account.payment(fromAccountId, referenceId, amount);
-        account.notify(toAccountId, referenceId, amount);
         for(int i=0; i < 100; i++){
+            account.payment(fromAccountId, referenceId, amount);
+            account.notify(toAccountId, referenceId, amount);
             System.out.println("loop:"+i);
-            Workflow.sleep(Duration.ofSeconds(10));
+            Workflow.sleep(Duration.ofSeconds(2));
         }
     }
 }
