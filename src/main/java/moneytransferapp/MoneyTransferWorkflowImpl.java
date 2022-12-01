@@ -36,8 +36,8 @@ public class MoneyTransferWorkflowImpl implements MoneyTransferWorkflow {
     @Override
     public void transfer(String fromAccountId, String toAccountId, String referenceId, double amount) {
 
-        account.withdraw(fromAccountId, referenceId, amount);
-        account.deposit(toAccountId, referenceId, amount);
+        account.payment(fromAccountId, referenceId, amount);
+        account.notify(toAccountId, referenceId, amount);
         for(int i=0; i < 100; i++){
             System.out.println("loop:"+i);
             Workflow.sleep(Duration.ofSeconds(10));

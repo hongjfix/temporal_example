@@ -41,7 +41,7 @@ public class MoneyTransferWorkflowTest {
                 .build();
         MoneyTransferWorkflow workflow = workflowClient.newWorkflowStub(MoneyTransferWorkflow.class, options);
         workflow.transfer("account1", "account2", "reference1", 1.23);
-        verify(activities).withdraw(eq("account1"), eq("reference1"), eq(1.23));
-        verify(activities).deposit(eq("account2"), eq("reference1"), eq(1.23));
+        verify(activities).payment(eq("account1"), eq("reference1"), eq(1.23));
+        verify(activities).notify(eq("account2"), eq("reference1"), eq(1.23));
     }
 }

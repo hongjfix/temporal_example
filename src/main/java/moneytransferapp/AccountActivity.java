@@ -9,9 +9,9 @@ import io.temporal.activity.ActivityMethod;
 public interface AccountActivity {
 
     @ActivityMethod
-    void deposit(String accountId, String referenceId, double amount);
+    void payment(String accountId, String referenceId, double amount);
 
     @ActivityMethod
-    void withdraw(String accountId, String referenceId, double amount);
+    void notify(String accountId, String referenceId, double amount);
 }
 // @@@SNIPEND
