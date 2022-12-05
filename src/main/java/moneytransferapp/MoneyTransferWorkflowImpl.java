@@ -35,12 +35,14 @@ public class MoneyTransferWorkflowImpl implements MoneyTransferWorkflow {
     // Activity method executions can be orchestrated here or from within other Activity methods.
     @Override
     public void transfer(String fromAccountId, String toAccountId, String referenceId, double amount) {
-
-        for(int i=0; i < 100; i++){
-            account.payment(fromAccountId, referenceId, amount);
-            account.notify(toAccountId, referenceId, amount);
-            System.out.println("loop:"+i);
-            Workflow.sleep(Duration.ofSeconds(2));
+        try {
+            for(int i=0; i < 100; i++){
+                account.payment(fromAccountId, String.valueOf(i), amount);
+                account.notify(toAccountId, String.valueOf(i), amount);
+                System.out.println("loop:"+i);
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -4,19 +4,21 @@ package moneytransferapp;
 public class AccountActivityImpl implements AccountActivity {
 
     @Override
-    public void payment(String accountId, String referenceId, double amount) {
+    public void payment(String accountId, String referenceId, double amount) throws InterruptedException {
 
+        Thread.sleep(1000);
         System.out.printf(
-                "\npayment $%f from account %s. ReferenceId: %s\n",
+                "\npayment $%f from account %s. loop: %s\n",
                 amount, accountId, referenceId
         );
     }
 
     @Override
-    public void notify(String accountId, String referenceId, double amount) {
+    public void notify(String accountId, String referenceId, double amount) throws InterruptedException {
 
+        Thread.sleep(1000);
         System.out.printf(
-                "\nnotify $%f into account %s. ReferenceId: %s\n",
+                "\nnotify $%f into account %s. loop: %s\n",
                 amount, accountId, referenceId
         );
         // Uncomment the following line to simulate an Activity error.
