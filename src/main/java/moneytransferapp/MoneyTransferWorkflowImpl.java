@@ -1,6 +1,8 @@
 package moneytransferapp;
 
 import io.temporal.activity.ActivityOptions;
+import io.temporal.api.workflowservice.v1.DescribeWorkflowExecutionRequest;
+import io.temporal.api.workflowservice.v1.DescribeWorkflowExecutionResponse;
 import io.temporal.workflow.Workflow;
 import io.temporal.common.RetryOptions;
 
@@ -37,10 +39,21 @@ public class MoneyTransferWorkflowImpl implements MoneyTransferWorkflow {
     public void transfer(String fromAccountId, String toAccountId, String referenceId, double amount) {
         try {
             for(int i=0; i < 100; i++){
-                account.payment(fromAccountId, String.valueOf(i), amount);
-                account.notify(toAccountId, String.valueOf(i), amount);
+                //if amount is 0, should throw an exception
+                if(amount == 0){
+                    System.out.println("amount = 0 ");
+                    throw new RuntimeException("amount is 0");
+                }
+                if(i%2 == 0) {
+                    account.payment(fromAccountId, String.valueOf(i), amount);
+                }else {
+                    account.notify(toAccountId, String.valueOf(i), amount);
+                }
                 System.out.println("loop:"+i);
             }
+
+
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
